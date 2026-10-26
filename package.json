@@ -1,0 +1,28 @@
+{
+  "name": "hahu-hw",
+  "version": "1.0.0",
+  "private": true,
+  "description": "HW for hahu interview",
+  "packageManager": "pnpm@12.15.0",
+  "scripts": {
+    "test": "playwright test",
+    "test:ui": "playwright test --ui",
+    "test:headed": "playwright test --headed",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "postinstall": "playwright install",
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "21.2.3",
+    "@commitlint/config-conventional": "21.2.3",
+    "@eslint/js": "10.0.1",
+    "@playwright/test": "1.63.0",
+    "@types/node": "26.6.2",
+    "eslint": "10.11.0",
+    "eslint-plugin-playwright": "2.12.0",
+    "husky": "9.1.7",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.70.0"
+  }
+}
