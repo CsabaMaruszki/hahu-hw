@@ -17,6 +17,9 @@
       ],
       "@pages/*": [
         "./src/pageobjects/*"
+      ],
+      "@utils/*": [
+        "./src/utils/*"
       ]
     }
   },
