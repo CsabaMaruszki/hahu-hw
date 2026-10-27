@@ -1,5 +1,5 @@
-import test, { expect, Locator, Page } from "@playwright/test";
-import { CommonPage } from "./common.page";
+import test, { expect, Locator, Page } from '@playwright/test';
+import { CommonPage } from './common.page';
 
 export class RegistrationPage extends CommonPage {
   constructor(
@@ -8,7 +8,7 @@ export class RegistrationPage extends CommonPage {
     readonly registrationForm = page.getByRole('form', { name: 'Regisztrációs űrlap' }),
     readonly nameInput = page.getByLabel('Név*', { exact: true }),
     readonly emailInput = page.locator('input[name="email"]'),
-    readonly zipInput = page.getByLabel('Irányítószám*', { exact: true })
+    readonly zipInput = page.getByLabel('Irányítószám*', { exact: true }),
   ) {
     super(page);
   }
@@ -19,5 +19,5 @@ export class RegistrationPage extends CommonPage {
       await this.registrationHeader.click();
       await expect(inputContainer).toContainText('A mező kitöltése kötelező.');
     });
-  }
+  };
 }
