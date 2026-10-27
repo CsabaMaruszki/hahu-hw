@@ -1,7 +1,8 @@
 import { defineConfig } from 'eslint/config';
 import eslint from '@eslint/js';
 import playwright from 'eslint-plugin-playwright';
-import tseslint from 'typescript-eslint'
+import stylistic from '@stylistic/eslint-plugin';
+import tseslint from 'typescript-eslint';
 
 export default defineConfig(
   {
@@ -14,10 +15,14 @@ export default defineConfig(
     ],
   },
   {
+    plugins: {
+      '@stylistic': stylistic
+    },
     files: ['**/*.ts'],
     extends: [
       eslint.configs.recommended,
-      tseslint.configs.recommendedTypeChecked
+      tseslint.configs.recommendedTypeChecked,
+      stylistic.configs.recommended
     ],
     languageOptions: {
       parserOptions: {
@@ -25,6 +30,7 @@ export default defineConfig(
         tsconfigRootDir: import.meta.dirname,
       },
     },
+    rules: { '@stylistic/semi': ['error', 'always'] }
   },
   {
     ...playwright.configs['flat/recommended'],
