@@ -6,9 +6,15 @@ export class RegistrationPage extends CommonPage {
     readonly page: Page,
     readonly registrationHeader = page.getByRole('heading', { name: 'Regisztráció' }),
     readonly registrationForm = page.getByRole('form', { name: 'Regisztrációs űrlap' }),
-    readonly nameInput = page.getByLabel('Név*', { exact: true }),
-    readonly emailInput = page.locator('input[name="email"]'),
-    readonly zipInput = page.getByLabel('Irányítószám*', { exact: true }),
+    readonly nameInput = registrationForm.getByLabel('Név*', { exact: true }),
+    readonly emailInput = registrationForm.locator('input[name="email"]'),
+    readonly emailConfirmInput = registrationForm.locator('input[name="confirmEmail"]'),
+    readonly zipInput = registrationForm.getByLabel('Irányítószám*', { exact: true }),
+    readonly passwordInput = registrationForm.getByLabel('Belépési jelszó*', { exact: true }),
+    readonly passwordConfirmInput = registrationForm.getByLabel('Belépési jelszó újra*', { exact: true }),
+    readonly termsCheckbox = registrationForm.getByRole('checkbox', { name: 'Elolvastam és elfogadom' }),
+    readonly registrationButton = registrationForm.getByTestId('submit-button'),
+    readonly successfulRegistrationText = page.getByText('Sikeres regisztráció!'),
   ) {
     super(page);
   }
@@ -18,6 +24,15 @@ export class RegistrationPage extends CommonPage {
       const inputContainer = inputFieldLocator.locator('>div');
       await this.registrationHeader.click();
       await expect(inputContainer).toContainText('A mező kitöltése kötelező.');
+    });
+  };
+
+  selectZipFromDropdown = async (zip: string) => {
+    await test.step(`Select ${zip} zip number`, async () => {
+      await this.zipInput.fill(zip);
+      const dropdownItem = this.page.locator('li').filter({ hasText: zip });
+      await dropdownItem.click();
+      await expect(this.zipInput).toHaveValue(new RegExp(zip));
     });
   };
 }
