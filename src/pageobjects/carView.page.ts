@@ -10,6 +10,8 @@ export class CarViewPage extends CommonPage {
     readonly openFullScreenGaleryButton = galeryContainer.getByRole('button', { name: 'Teljes képernyős nagyítás' }),
     readonly fullScreenGaleryContainer = page.locator('#fullScreenGallery'),
     readonly closeFullScreenGaleryButton = fullScreenGaleryContainer.getByRole('button', { name: 'Bezárás' }),
+    readonly shareButton = functionsContainer.getByTestId('share-button'),
+    readonly shareCopyLinkButton = page.getByTestId('share-copy-link-button'),
   ) {
     super(page);
   }
