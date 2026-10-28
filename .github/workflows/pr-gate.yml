@@ -1,0 +1,36 @@
+name: PR Gate - Playwright Tests
+
+on:
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  playwright-tests:
+    name: Run E2E Tests (Playwright)
+    runs-on: ubuntu-26.04-arm
+    
+    # Run the entire job inside the official Playwright Docker container
+    container:
+      image: mcr.microsoft.com/playwright:v1.63.0
+      options: --user root
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Enable Corepack & Setup pnpm
+        run: |
+          corepack enable
+          corepack prepare pnpm@12.15.0 --activate
+
+      - name: Install Dependencies
+        run: pnpm install
+
+      - name: Run Playwright Tests
+        run: pnpm test
+        env:
+          CI: true
+          CROSS_BROWSER: false
+          TEST_USER_EMAIL: ${{ secrets.TEST_USER_EMAIL }}
+          TEST_USER_PASSWORD: ${{ secrets.TEST_USER_PASSWORD }}
