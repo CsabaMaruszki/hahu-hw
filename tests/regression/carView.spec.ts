@@ -15,8 +15,20 @@ test.describe('Car view tests', { tag: '@carView' }, () => {
     await verifyAdvertTitle(page, 'FORD PUMA 1.0 EcoBoost mHEV Titanium DCT');
   });
 
-  test('Add car to car park', { tag: '@smoke' }, async () => {
+  test('Add car to car park', { tag: ['@smoke', '@park'] }, async () => {
     await carViewPage.parkButton.click();
     await expect(carViewPage.toastContainer).toContainText('A jármű parkolóba helyezése sikeres.');
+  });
+
+  test('Full screen galery opens and closes', { tag: ['@smoke', '@galery'] }, async () => {
+    await test.step('Full screen galery opens', async () => {
+      await carViewPage.openFullScreenGaleryButton.click();
+      await expect(carViewPage.fullScreenGaleryContainer).toBeVisible();
+    });
+
+    await test.step('Full screen galery closes', async () => {
+      await carViewPage.closeFullScreenGaleryButton.click();
+      await expect(carViewPage.fullScreenGaleryContainer).toBeHidden();
+    });
   });
 });
