@@ -3,7 +3,7 @@ playwright-report/
 test-results/
 blob-report/
 .env
-.env.*
 *.log
 playwright/.cache/
+playwright/.auth/
 pnpm-lock.yaml
